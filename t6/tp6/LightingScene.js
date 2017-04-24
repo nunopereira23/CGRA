@@ -81,6 +81,9 @@ LightingScene.prototype.init = function(application) {
 	this.materialB.setShininess(120);
 	
 	this.setUpdatePeriod(100);
+	this.option1=true;
+	this.option2=true;
+	this.speed=3;
 };
 
 LightingScene.prototype.initCameras = function() {
@@ -240,4 +243,8 @@ LightingScene.prototype.display = function() {
 
 LightingScene.prototype.update = function(currTime){
 	this.clock.update(currTime);
-}
+};
+
+LightingScene.prototype.doSomething = function (){
+	 console.log("Doing something..."); 
+};
