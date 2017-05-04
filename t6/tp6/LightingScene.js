@@ -39,6 +39,7 @@ LightingScene.prototype.init = function(application) {
 	this.boardA = new Plane(this,-0.16, 1.3, 0.1, 0.8, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, 0, 1, 0, 1, BOARD_B_DIVISIONS);
 	this.clock = new MyClock(this);
+	this.submarine = new MySubmarine(this);
 
 
 	
@@ -171,7 +172,7 @@ LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Primitive drawing section
 
-
+/*
 	// Plane Wall
 	this.pushMatrix();
 		this.translate(7.5, 4, 0);
@@ -192,7 +193,7 @@ LightingScene.prototype.display = function() {
 	// First Table
 	this.pushMatrix();
 		this.translate(5, 0, 8);
-		this.table.display();
+	//	this.table.display();
 	this.popMatrix();
 
 	// Second Table
@@ -239,6 +240,10 @@ LightingScene.prototype.display = function() {
 	//this.cylinder.display();
 
 	// ---- END Primitive drawing section
+	*/
+
+
+	this.submarine.display();
 };
 
 LightingScene.prototype.update = function(currTime){
