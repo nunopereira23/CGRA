@@ -20,7 +20,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.initLights();
 
-	this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+	this.gl.clearColor(0.0, 0.0, 0.3, 1.0);
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -30,56 +30,16 @@ LightingScene.prototype.init = function(application) {
 	this.enableTextures(true);
 
 	// Scene elements
-	this.table = new MyTable(this);
-	this.wallB = new Plane(this);
-	this.wall = new MyQuad(this, -0.5,1.5, -0.5, 1.5);
-	this.floor = new MyQuad(this,0,12,0,10);
-	this.prism = new MyPrism(this,8,20);
-	this.cylinder = new MyCylinder(this,8,20);
-	this.boardA = new Plane(this,-0.16, 1.3, 0.1, 0.8, BOARD_A_DIVISIONS);
-	this.boardB = new Plane(this, 0, 1, 0, 1, BOARD_B_DIVISIONS);
 	this.clock = new MyClock(this);
-
-
+	this.background = new Plane(this);
+	//this.submarine new MySubmarine(this);
 	
-	
-	this.tableAppearance = new CGFappearance(this);
-	
-	this.floorAppearance = new CGFappearance(this);
-	this.floorAppearance.loadTexture("../resources/images/floor.png");
-	
-	this.windowAppearance = new CGFappearance(this);
-	this.windowAppearance.loadTexture("../resources/images/window.png");
-	this.windowAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
-	
-	this.slidesAppearance = new CGFappearance(this);
-	this.slidesAppearance.setSpecular(0.1,0.1,0.1,1);
-	this.slidesAppearance.setShininess(10);
-	this.slidesAppearance.setDiffuse(1,1,1,1);
-	this.slidesAppearance.loadTexture("../resources/images/slides.png");
 
-	this.boardAppearance = new CGFappearance(this);
-	this.boardAppearance.setSpecular(0.8,0.8,0.8,1);
-	this.boardAppearance.setShininess(120);
-	this.boardAppearance.setDiffuse(0.7,0.7,0.7,1);
-	this.boardAppearance.loadTexture("../resources/images/board.png");
-
-
-	// Materials
+	this.backgroundAppearance = new CGFappearance(this);
+	this.backgroundAppearance.loadTexture("../resources/images/ocean.jpg");
+	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
+	
 	this.materialDefault = new CGFappearance(this);
-	
-	this.materialA = new CGFappearance(this);
-	this.materialA.setAmbient(0.3,0.3,0.3,1);
-	this.materialA.setDiffuse(0.6,0.6,0.6,1);
-	this.materialA.setSpecular(0,0.2,0.8,1);
-	this.materialA.setShininess(120);
-
-	this.materialB = new CGFappearance(this);
-	this.materialB.setAmbient(0.3,0.3,0.3,1);
-	this.materialB.setDiffuse(0.6,0.6,0.6,1);
-	this.materialB.setSpecular(0.8,0.8,0.8,1);	
-	this.materialB.setShininess(120);
-	
 	this.setUpdatePeriod(100);
 
 	this.option1 = true;
@@ -161,6 +121,8 @@ LightingScene.prototype.display = function() {
 	this.axis.display();
 
 	this.materialDefault.apply();
+	this.backgroundAppearance.apply();
+	this.background.display();
 
 	// ---- END Background, camera and axis setup
 
@@ -172,75 +134,10 @@ LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Primitive drawing section
 
-
-	// Plane Wall
-	this.pushMatrix();
-		this.translate(7.5, 4, 0);
-		this.scale(15, 8, 0.2);
-		this.wallB.display();
-	this.popMatrix();
-
-	// Left Wall
-	this.pushMatrix();
-		this.translate(0, 4, 7.5);
-		this.rotate(90 * degToRad, 0, 1, 0);
-		this.scale(15, 8, 0.2);
-		this.windowAppearance.apply();
-		this.wall.display();
-	this.popMatrix();
-
-
-	// First Table
-	this.pushMatrix();
-		this.translate(5, 0, 8);
-		this.table.display();
-	this.popMatrix();
-
-	// Second Table
-	this.pushMatrix();
-		this.translate(12, 0, 8);
-		this.table.display();
-	this.popMatrix();
-
-	// Board A
-	this.pushMatrix();
-		this.translate(4, 4.5, 0.2);
-		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		this.slidesAppearance.apply();
-		this.boardA.display();
-	this.popMatrix();
-
-	// Board B
-	this.pushMatrix();
-		this.translate(10.5, 4.5, 0.2);
-		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		this.boardAppearance.apply();
-		this.boardB.display();
-	this.popMatrix();
-
-
-		// Floor
-	this.pushMatrix();
-		this.translate(7.5, 0, 7.5);
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(15, 15, 0.2);
-		this.floorAppearance.apply();
-		this.floor.display();
-	this.popMatrix();
-
-	//Clock
-	this.pushMatrix();
-		this.translate(7.3,7.3,0);
-		this.scale(0.7,0.7,0.1);
-		this.clock.display();
-	this.popMatrix();
-
-	//this.prism.display();
-
-	//this.cylinder.display();
-
 	// ---- END Primitive drawing section
 };
+
+
 
 LightingScene.prototype.update = function(currTime){
 	this.clock.update(currTime);

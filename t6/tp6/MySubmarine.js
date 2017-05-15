@@ -1,6 +1,13 @@
-function MySubmarine(scene) {
+var degToRad = Math.PI / 180.0;
+
+function MySubmarine(scene, x=0, y=0, z, direction=0, declination=0) {
 	CGFobject.call(this,scene);
 
+    this.x=x;
+    this.y=y;
+    this.z=z;
+    this.direction=degToRad(direction);
+    this.declination=degToRad(declination);
 	this.initBuffers();
 };
 
