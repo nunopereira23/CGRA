@@ -71,4 +71,3 @@ MyInterface.prototype.processKeyboard = function(event) {
 			console.log("Key 'A' pressed");
 	};
 };
-
