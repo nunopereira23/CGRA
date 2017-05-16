@@ -20,7 +20,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.initLights();
 
-	this.gl.clearColor(0.0, 0.0, 0.3, 1.0);
+	this.gl.clearColor(0.0, 0.1, 0.4, 1.0);
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -32,11 +32,13 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 	this.clock = new MyClock(this);
 	this.background = new Plane(this);
+	this.backgroundy = new Plane(this);
+	this.backgroundz = new Plane(this);
 	//this.submarine new MySubmarine(this);
 	
 
 	this.backgroundAppearance = new CGFappearance(this);
-	this.backgroundAppearance.loadTexture("../resources/images/ocean.jpg");
+	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
 	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
 	
 	this.materialDefault = new CGFappearance(this);
@@ -120,10 +122,32 @@ LightingScene.prototype.display = function() {
 	// Draw axis
 	this.axis.display();
 
-	this.materialDefault.apply();
+	//Draw Plane
+	this.pushMatrix();
+	this.translate(7.5,7.5,0);
+	this.scale(15,15,15);
 	this.backgroundAppearance.apply();
 	this.background.display();
+	this.popMatrix();
 
+	//Draw Plane
+	this.pushMatrix();
+	this.rotate(-90*degToRad,1,0,0);
+	this.translate(7.5,-7.5,0);
+	this.scale(15,15,15);
+	this.backgroundAppearance.apply();
+	this.backgroundy.display();
+	this.popMatrix();
+
+	//Draw Plane
+	this.pushMatrix();
+	this.rotate(90*degToRad,0,1,0);
+	this.translate(-7.5,7.5,0);
+	this.scale(15,15,15);
+	this.backgroundAppearance.apply();
+	this.backgroundz.display();
+	this.popMatrix();
+	
 	// ---- END Background, camera and axis setup
 
 	
