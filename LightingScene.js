@@ -222,6 +222,7 @@ LightingScene.prototype.display = function() {
 
 
 LightingScene.prototype.update = function(currTime){
+	if(this.enable)
 	this.clock.update(currTime);
 }
 
