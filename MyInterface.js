@@ -65,9 +65,34 @@ MyInterface.prototype.processKeyboard = function(event) {
 	// or use String.fromCharCode(event.keyCode) to compare chars
 	
 	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
-	switch (event.keyCode)
-	{
-		case (65):	// only works for capital 'A', as it is
-			console.log("Key 'A' pressed");
+	
+    switch (event.keyCode)
+    {
+        //a ou A
+        case (65):
+        case (97):
+        {
+        this.scene.submarine.handleKeyPressed('a');
+        console.log("Key 'A' pressed");
+        }
+        break;
+
+        //d ou D
+        case (68):
+        case (100):
+        this.scene.submarine.handleKeyPressed('d');
+        break;
+
+        //s ou S
+        case (83):
+        case (115):
+        this.scene.submarine.handleKeyPressed('s');
+        break;
+
+        //w ou W
+        case (87):
+        case (119):
+        this.scene.submarine.handleKeyPressed('w');
+        break;
 	};
 };

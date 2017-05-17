@@ -6,8 +6,25 @@ function MySubmarine(scene, x=0, y=0, z, direction=0, declination=0) {
     this.x=x;
     this.y=y;
     this.z=z;
+
+    this.dirAngle=0;
+
+    this.speed=0.00;
+    this.accel=0.05;
+    this.accelDrag=0.0025;
+
+	this.rotSpeed=0.00;
+	this.rotAccel=0.005;
+	this.rotDrag=0.0025;
+
     this.direction=degToRad * direction;
     this.declination=degToRad * declination;
+
+	this.moveForward=false;
+	this.moveBack=false;
+	this.rotateLeft=false;
+	this.rotateRight=false;
+
 	this.initBuffers();
 };
 
@@ -39,6 +56,135 @@ MySubmarine.prototype.initBuffers = function () {
     this.minS,  this.minT  
     ]*/
 
+
+
+
+
+
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
  };
+
+ MySubmarine.prototype.handleKeyPressed = function(key){
+ 	switch(key){
+
+ 		case 'a':{
+ 			this.rotateLeft=true;
+ 		}
+ 		break;
+
+ 		case 'd':{
+ 			this.rotateRight=true;
+ 		}
+ 		break;
+
+ 		case 'w':{
+ 			this.moveForward=true;
+ 		}
+ 		break;
+
+ 		case 's':{
+ 			this.moveBack=true;
+ 		}
+ 		break;
+
+ 		
+ 	}
+ };
+
+
+
+ MySubmarine.prototype.handleKeyUnpressed = function(key){
+ 	switch(key){
+
+ 		case 'a':{
+ 			this.rotateLeft=false;
+ 		}
+ 		break;
+
+ 		case 'd':{
+ 			this.rotateRight=false;
+ 		}
+ 		break;
+
+ 		case 'w':{
+ 			this.moveForward=false;
+ 		}
+ 		break;
+
+ 		case 's':{
+ 			this.moveBack=false;
+ 		}
+ 		break;
+
+ 		
+ 	}
+ };
+
+
+
+ MySubmarine.prototype.increaseVeloc = function(){
+
+	if(this.scene.speed ==0){
+		this.scene.speed+=1;
+	}
+	
+    else if (this.scene.speed >= 5){
+        this.scene.speed = 5;
+    }
+    else{
+        this.scene.speed += accel;
+    }
+}
+
+MySubmarine.prototype.decreaseVeloc = function(){
+    
+	if(this.scene.speed ==0){
+		this.scene.speed-=1;
+	}
+
+    else if (this.scene.speed <= -5){
+        this.scene.speed = -5;
+    }
+    else{
+        this.scene.speed -= accel;
+    }
+}
+
+
+ MySubmarine.prototype.update = function(currTime){
+
+ 	this.lastime = this.lastime || currTime;
+ 	var dt = currTime - this.lastime;
+	this.lastime = currTime;
+
+ 	 if(this.moveForward){
+		this.increaseVeloc();
+ 	 }
+
+ 	 if(this.moveBack){
+ 	 	this.decreaseVeloc();
+ 	 }
+
+
+//Drag apply
+
+		if(this.scene.speed > 0.0000) 
+		this.speed-=this.speedDrag;
+		else if(this.speed < 0.0000) 
+		this.speed+=this.speedDrag;
+
+
+		if(this.rotSpeed > 0.0000) 
+		this.rotSpeed -= this.rotDrag;
+		else if(this.rotSpeed < 0.0000) 
+		this.rotSpeed += this.rotDrag;
+
+
+//Movement Update
+	this.z += Math.cos(this.dirAngle) * this.scene.speed*0.05/1000;
+	this.x += Math.sin(this.dirAngle) * this.scene.speed*0.05/1000;
+	//this.y -= Math.tan(this.dirAngle) * (dt * this.scene.speed / 60000) * Math.cos(this.hor_angle);
+
+
+ }
