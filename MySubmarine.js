@@ -1,29 +1,24 @@
 var degToRad = Math.PI / 180.0;
 
-function MySubmarine(scene, x=0, y=0, z, direction=0, declination=0) {
+function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	CGFobject.call(this,scene);
 
     this.x=x;
     this.y=y;
     this.z=z;
 
-    this.dirAngle=0;
+    this.dirAngle=degToRad*90;
 
     this.speed=0.00;
     this.accel=0.05;
-    this.accelDrag=0.0025;
+    this.accelDrag=0.001;
 
-	this.rotSpeed=0.00;
-	this.rotAccel=0.005;
+	this.rotSpeed=0.05;
+	this.rotAccel=0.05;
 	this.rotDrag=0.0025;
 
-    this.direction=degToRad * direction;
     this.declination=degToRad * declination;
 
-	this.moveForward=false;
-	this.moveBack=false;
-	this.rotateLeft=false;
-	this.rotateRight=false;
 
 	this.initBuffers();
 };
@@ -65,126 +60,61 @@ MySubmarine.prototype.initBuffers = function () {
  	this.initGLBuffers();
  };
 
- MySubmarine.prototype.handleKeyPressed = function(key){
- 	switch(key){
-
- 		case 'a':{
- 			this.rotateLeft=true;
- 		}
- 		break;
-
- 		case 'd':{
- 			this.rotateRight=true;
- 		}
- 		break;
-
- 		case 'w':{
- 			this.moveForward=true;
- 		}
- 		break;
-
- 		case 's':{
- 			this.moveBack=true;
- 		}
- 		break;
-
- 		
- 	}
- };
-
-
-
- MySubmarine.prototype.handleKeyUnpressed = function(key){
- 	switch(key){
-
- 		case 'a':{
- 			this.rotateLeft=false;
- 		}
- 		break;
-
- 		case 'd':{
- 			this.rotateRight=false;
- 		}
- 		break;
-
- 		case 'w':{
- 			this.moveForward=false;
- 		}
- 		break;
-
- 		case 's':{
- 			this.moveBack=false;
- 		}
- 		break;
-
- 		
- 	}
- };
-
-
 
  MySubmarine.prototype.increaseVeloc = function(){
-
-	if(this.scene.speed ==0){
-		this.scene.speed+=1;
-	}
 	
-    else if (this.scene.speed >= 5){
-        this.scene.speed = 5;
+    if (this.speed >= 5){
+        this.speed = 5;
     }
     else{
-        this.scene.speed += accel;
+        this.speed += this.accel;
     }
 }
 
 MySubmarine.prototype.decreaseVeloc = function(){
-    
-	if(this.scene.speed ==0){
-		this.scene.speed-=1;
-	}
-
-    else if (this.scene.speed <= -5){
-        this.scene.speed = -5;
+  
+    if (this.speed <= -5){
+        this.speed = -5;
     }
     else{
-        this.scene.speed -= accel;
+        this.speed -= this.accel;
     }
 }
 
+MySubmarine.prototype.rotate = function(direction) {
+
+	//direction=0 ->right
+
+	if(direction==0){
+		this.dirAngle-=this.rotSpeed;
+ 		this.dirAngle %= degToRad*360;
+	}
+	else{
+		this.dirAngle+=this.rotSpeed;
+ 		if(this.dirAngle<0)
+ 		this.dirAngle=360 * degToRad * dirAngle-this.rotSpeed;
+	}
+}
 
  MySubmarine.prototype.update = function(currTime){
 
- 	this.lastime = this.lastime || currTime;
- 	var dt = currTime - this.lastime;
-	this.lastime = currTime;
 
- 	 if(this.moveForward){
-		this.increaseVeloc();
- 	 }
 
- 	 if(this.moveBack){
- 	 	this.decreaseVeloc();
- 	 }
-
+ 	this.x += (this.speed) * Math.sin(this.dirAngle);
+ 	this.z +=(this.speed) *Math.cos(this.dirAngle);
+	
+	console.log(this.speed);
 
 //Drag apply
+/*
+		if(this.speed > 0.000000000000) 
+		this.speed-=this.accelDrag;
+		else if(this.speed < 0.0000000000) 
+		this.speed+=this.accelDrag;
+		else {
+			speed=0;
+		}
 
-		if(this.scene.speed > 0.0000) 
-		this.speed-=this.speedDrag;
-		else if(this.speed < 0.0000) 
-		this.speed+=this.speedDrag;
-
-
-		if(this.rotSpeed > 0.0000) 
-		this.rotSpeed -= this.rotDrag;
-		else if(this.rotSpeed < 0.0000) 
-		this.rotSpeed += this.rotDrag;
-
-
-//Movement Update
-	this.z += Math.cos(this.dirAngle) * this.scene.speed*0.05/1000;
-	this.x += Math.sin(this.dirAngle) * this.scene.speed*0.05/1000;
-	//this.y -= Math.tan(this.dirAngle) * (dt * this.scene.speed / 60000) * Math.cos(this.hor_angle);
-
+*/
 
  }

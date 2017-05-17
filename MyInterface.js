@@ -71,28 +71,25 @@ MyInterface.prototype.processKeyboard = function(event) {
         //a ou A
         case (65):
         case (97):
-        {
-        this.scene.submarine.handleKeyPressed('a');
-        console.log("Key 'A' pressed");
-        }
+        this.scene.submarine.rotate(1);
         break;
 
         //d ou D
         case (68):
         case (100):
-        this.scene.submarine.handleKeyPressed('d');
+        this.scene.submarine.rotate(0);
         break;
 
         //s ou S
         case (83):
         case (115):
-        this.scene.submarine.handleKeyPressed('s');
+        this.scene.submarine.decreaseVeloc();
         break;
 
         //w ou W
         case (87):
         case (119):
-        this.scene.submarine.handleKeyPressed('w');
+        this.scene.submarine.increaseVeloc();
         break;
 	};
 };

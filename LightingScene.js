@@ -120,6 +120,8 @@ LightingScene.prototype.display = function() {
 	// Update all lights used
 	this.updateLights();
 
+	this.submarine.update();
+
 	// Draw axis
 	this.axis.display();
 
@@ -168,9 +170,15 @@ LightingScene.prototype.display = function() {
 
 	// Draw submarine
 	this.pushMatrix();
-	this.rotate(degToRad * 90,0,1,0);
+	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
+	this.pushMatrix();
+	this.rotate(this.submarine.dirAngle,0,1,0);
 	this.submarine.display();
 	this.popMatrix();
+	this.popMatrix();
+	console.log("x:" + this.submarine.x);
+	console.log("y:" + this.submarine.y);
+	console.log("z:" + this.submarine.z);
 
 
 	// ---- END Background, camera and axis setup
