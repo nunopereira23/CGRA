@@ -45,8 +45,13 @@ LightingScene.prototype.init = function(application) {
 	this.materialDefault = new CGFappearance(this);
 	this.setUpdatePeriod(100);
 
-	this.option1 = true;
-	this.option2 = false;
+	this.ambientLight = true;
+	this.light_1 = true;
+	this.light_2 = true;
+	this.light_3 = true;
+	this.light_4 = true;
+	this.light_5 = true;
+	this.enable = true;
 	this.speed = 3;
 };
 
@@ -56,6 +61,7 @@ LightingScene.prototype.initCameras = function() {
 
 LightingScene.prototype.initLights = function() {
 	this.setGlobalAmbientLight(0, 0, 0, 1.0);
+	//this.setGlobalAmbientLight(0.0, 1.0, 1.0, 1.0); // Cyan ambient light
 	
 	// Positions for four lights
 	this.lights[0].setPosition(4, 6, 1, 1);
@@ -98,9 +104,28 @@ LightingScene.prototype.initLights = function() {
 };
 
 LightingScene.prototype.updateLights = function() {
+	lights = [
+		this.light_1,
+		this.light_2,
+		this.light_3,
+		this.light_4,
+		this.light_5
+	]
+
+	for (i = 0; i < this.lights.length; i++)
+		if (lights[i])
+		this.lights[i].enable();
+		else this.lights[i].disable();
+
 	for (i = 0; i < this.lights.length; i++)
 		this.lights[i].update();
-}
+
+	if (this.ambientLight)
+		this.setGlobalAmbientLight(1, 1, 1, 1.0);
+		//this.setGlobalAmbientLight(0.0, 1.0, 1.0, 1.0); // Cyan ambient light
+	else
+		this.setGlobalAmbientLight(0.0, 0.0, 0.0,1.0); // No ambient light
+};
 
 
 LightingScene.prototype.display = function() {
@@ -176,9 +201,9 @@ LightingScene.prototype.display = function() {
 	this.submarine.display();
 	this.popMatrix();
 	this.popMatrix();
-	console.log("x:" + this.submarine.x);
-	console.log("y:" + this.submarine.y);
-	console.log("z:" + this.submarine.z);
+	//console.log("x:" + this.submarine.x);
+	//console.log("y:" + this.submarine.y);
+	//console.log("z:" + this.submarine.z);
 
 
 	// ---- END Background, camera and axis setup
@@ -200,7 +225,7 @@ LightingScene.prototype.update = function(currTime){
 	this.clock.update(currTime);
 }
 
-LightingScene.prototype.doSomething = function ()
+LightingScene.prototype.Settings = function ()
 {
 	console.log("Doing Something ...");
 };

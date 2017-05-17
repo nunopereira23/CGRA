@@ -103,7 +103,7 @@ MySubmarine.prototype.rotate = function(direction) {
  	this.x += (this.speed) * Math.sin(this.dirAngle);
  	this.z +=(this.speed) *Math.cos(this.dirAngle);
 	
-	console.log(this.speed);
+	//console.log(this.speed);
 
 //Drag apply
 /*
