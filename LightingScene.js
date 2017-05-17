@@ -151,15 +151,18 @@ LightingScene.prototype.display = function() {
 	
 	//Draw poste 
 	this.pushMatrix();
-	this.scale(1,5,1);
+	this.scale(1,4,1);
 	this.rotate(degToRad* -90,1,0,0);
 	this.translate(8,0,0);
+	this.scale(0.35,0.35,1.02);
+	this.setShininess(100);
 	this.poste.display();
 	this.popMatrix();
 
 	//Draw clock
 	this.pushMatrix();
 	this.translate(8,5,0);
+	this.scale(1,1,0.3);
 	this.clock.display();
 	this.popMatrix();
 
