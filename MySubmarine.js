@@ -11,13 +11,20 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 
     this.speed=0.00;
     this.accel=0.05;
-    this.accelDrag=0.001;
-
 	this.rotSpeed=0.05;
 	this.rotAccel=0.05;
-	this.rotDrag=0.0025;
 
     this.declination=degToRad * declination;
+
+
+	this.semi = new MySemiSphere(scene, 200,1);
+	this.body = new MyCylinder(scene,100,1);
+
+
+	this.topSubmarineAppearance = new CGFappearance(scene);
+	this.topSubmarineAppearance.loadTexture("../resources/images/topsphere.png");
+	this.bodySubmarineAppearance = new CGFappearance(scene);
+	this.bodySubmarineAppearance.loadTexture("../resources/images/body.png");
 
 
 	this.initBuffers();
@@ -26,7 +33,7 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor=MySubmarine;
 
-MySubmarine.prototype.initBuffers = function () {
+/*MySubmarine.prototype.initBuffers = function () {
 	this.vertices = [
             0.5, 0.3, 0.0,
             -0.5, 0.3, 0.0,
@@ -45,11 +52,11 @@ MySubmarine.prototype.initBuffers = function () {
     0, 0, 1,
     ]
     
-  /* this.texCoords = [
+  this.texCoords = [
     this.minS, this.maxT, //(0,1)
     this.maxS,  this.maxT, //(1,1)
     this.minS,  this.minT  
-    ]*/
+    ]
 
 
 
@@ -59,7 +66,7 @@ MySubmarine.prototype.initBuffers = function () {
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
  };
-
+*/
 
  MySubmarine.prototype.increaseVeloc = function(){
 	
@@ -102,19 +109,24 @@ MySubmarine.prototype.rotate = function(direction) {
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
  	this.z +=(this.speed) *Math.cos(this.dirAngle);
-	
-	//console.log(this.speed);
 
-//Drag apply
-/*
-		if(this.speed > 0.000000000000) 
-		this.speed-=this.accelDrag;
-		else if(this.speed < 0.0000000000) 
-		this.speed+=this.accelDrag;
-		else {
-			speed=0;
-		}
+ }
 
-*/
+ MySubmarine.prototype.display = function(){
+
+ 	//Draw submarine front and back
+		this.scene.pushMatrix();
+		this.scene.translate(0,0,4.08);
+		this.scene.scale(0.73, 0.94, 0.46);
+		this.topSubmarineAppearance.apply();
+		this.semi.display();
+		this.scene.popMatrix();
+
+	//Draw cilinder from submarine
+		this.scene.pushMatrix();
+		this.scene.scale(0.73, 0.94, 4.08);	
+		this.bodySubmarineAppearance.apply();	
+		this.body.display();
+		this.scene.popMatrix;
 
  }

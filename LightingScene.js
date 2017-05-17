@@ -37,10 +37,13 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this, 100, 1);
 	
+	
 
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
 	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
+
+	
 	
 	this.materialDefault = new CGFappearance(this);
 	this.setUpdatePeriod(100);
@@ -122,7 +125,6 @@ LightingScene.prototype.updateLights = function() {
 
 	if (this.ambientLight)
 		this.setGlobalAmbientLight(1, 1, 1, 1.0);
-		//this.setGlobalAmbientLight(0.0, 1.0, 1.0, 1.0); // Cyan ambient light
 	else
 		this.setGlobalAmbientLight(0.0, 0.0, 0.0,1.0); // No ambient light
 };
@@ -198,6 +200,7 @@ LightingScene.prototype.display = function() {
 	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
 	this.pushMatrix();
 	this.rotate(this.submarine.dirAngle,0,1,0);
+	this.translate(-1,1,1);
 	this.submarine.display();
 	this.popMatrix();
 	this.popMatrix();
@@ -205,6 +208,9 @@ LightingScene.prototype.display = function() {
 	//console.log("y:" + this.submarine.y);
 	//console.log("z:" + this.submarine.z);
 
+
+	
+	
 
 	// ---- END Background, camera and axis setup
 

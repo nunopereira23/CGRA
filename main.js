@@ -17,6 +17,7 @@ serialInclude([
 	'MyClockHand.js',
 	'MyInterface.js',
 	'MySubmarine.js',
+	'MySemiSphere.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
