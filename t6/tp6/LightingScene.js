@@ -34,7 +34,8 @@ LightingScene.prototype.init = function(application) {
 	this.background = new Plane(this);
 	this.backgroundy = new Plane(this);
 	this.backgroundz = new Plane(this);
-	//this.submarine new MySubmarine(this);
+	this.submarine = new MySubmarine(this);
+	this.poste = new MyCylinder(this, 100, 1);
 	
 
 	this.backgroundAppearance = new CGFappearance(this);
@@ -148,6 +149,30 @@ LightingScene.prototype.display = function() {
 	this.backgroundz.display();
 	this.popMatrix();
 	
+	//Draw poste 
+	this.pushMatrix();
+	this.scale(1,4,1);
+	this.rotate(degToRad* -90,1,0,0);
+	this.translate(8,0,0);
+	this.scale(0.35,0.35,1.02);
+	this.setShininess(100);
+	this.poste.display();
+	this.popMatrix();
+
+	//Draw clock
+	this.pushMatrix();
+	this.translate(8,5,0);
+	this.scale(1,1,0.3);
+	this.clock.display();
+	this.popMatrix();
+
+	// Draw submarine
+	this.pushMatrix();
+	this.rotate(degToRad * 90,0,1,0);
+	this.submarine.display();
+	this.popMatrix();
+
+
 	// ---- END Background, camera and axis setup
 
 	
