@@ -43,6 +43,8 @@ LightingScene.prototype.init = function(application) {
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
 	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
 
+	this.postAppearance = new CGFappearance(this);
+	this.postAppearance.loadTexture("../resources/images/postTexture.png");
 	
 	
 	this.materialDefault = new CGFappearance(this);
@@ -185,6 +187,7 @@ LightingScene.prototype.display = function() {
 	this.translate(8,0,0);
 	this.scale(0.35,0.35,1.02);
 	this.setShininess(100);
+	this.postAppearance.apply();
 	this.poste.display();
 	this.popMatrix();
 

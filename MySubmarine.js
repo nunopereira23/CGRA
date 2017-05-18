@@ -122,6 +122,13 @@ MySubmarine.prototype.rotate = function(direction) {
 		this.semi.display();
 		this.scene.popMatrix();
 
+		this.scene.pushMatrix();
+		this.scene.scale(0.73, 0.94, 0.46);
+		this.scene.rotate(degToRad*180,1,0,0);
+		this.topSubmarineAppearance.apply();
+		this.semi.display();
+		this.scene.popMatrix();
+
 	//Draw cilinder from submarine
 		this.scene.pushMatrix();
 		this.scene.scale(0.73, 0.94, 4.08);	
