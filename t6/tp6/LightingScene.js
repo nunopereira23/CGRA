@@ -36,17 +36,28 @@ LightingScene.prototype.init = function(application) {
 	this.backgroundz = new Plane(this);
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this, 100, 1);
+	this.cilindro = new MyCylinderV2(this, 100, 1, true);
+	
 	
 
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
 	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
+
+	this.postAppearance = new CGFappearance(this);
+	this.postAppearance.loadTexture("../resources/images/postTexture.png");
+	
 	
 	this.materialDefault = new CGFappearance(this);
 	this.setUpdatePeriod(100);
 
-	this.option1 = true;
-	this.option2 = false;
+	this.ambientLight = true;
+	this.light_1 = true;
+	this.light_2 = true;
+	this.light_3 = true;
+	this.light_4 = true;
+	this.light_5 = true;
+	this.enable = true;
 	this.speed = 3;
 };
 
@@ -56,6 +67,7 @@ LightingScene.prototype.initCameras = function() {
 
 LightingScene.prototype.initLights = function() {
 	this.setGlobalAmbientLight(0, 0, 0, 1.0);
+	//this.setGlobalAmbientLight(0.0, 1.0, 1.0, 1.0); // Cyan ambient light
 	
 	// Positions for four lights
 	this.lights[0].setPosition(4, 6, 1, 1);
@@ -98,9 +110,27 @@ LightingScene.prototype.initLights = function() {
 };
 
 LightingScene.prototype.updateLights = function() {
+	lights = [
+		this.light_1,
+		this.light_2,
+		this.light_3,
+		this.light_4,
+		this.light_5
+	]
+
+	for (i = 0; i < this.lights.length; i++)
+		if (lights[i])
+		this.lights[i].enable();
+		else this.lights[i].disable();
+
 	for (i = 0; i < this.lights.length; i++)
 		this.lights[i].update();
-}
+
+	if (this.ambientLight)
+		this.setGlobalAmbientLight(1, 1, 1, 1.0);
+	else
+		this.setGlobalAmbientLight(0.0, 0.0, 0.0,1.0); // No ambient light
+};
 
 
 LightingScene.prototype.display = function() {
@@ -119,6 +149,8 @@ LightingScene.prototype.display = function() {
 
 	// Update all lights used
 	this.updateLights();
+
+	this.submarine.update();
 
 	// Draw axis
 	this.axis.display();
@@ -156,6 +188,7 @@ LightingScene.prototype.display = function() {
 	this.translate(8,0,0);
 	this.scale(0.35,0.35,1.02);
 	this.setShininess(100);
+	this.postAppearance.apply();
 	this.poste.display();
 	this.popMatrix();
 
@@ -168,10 +201,25 @@ LightingScene.prototype.display = function() {
 
 	// Draw submarine
 	this.pushMatrix();
-	this.rotate(degToRad * 90,0,1,0);
+	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
+	this.pushMatrix();
+	this.rotate(this.submarine.dirAngle,0,1,0);
+	this.translate(-1,1,1);
 	this.submarine.display();
 	this.popMatrix();
+	this.popMatrix();
+	//console.log("x:" + this.submarine.x);
+	//console.log("y:" + this.submarine.y);
+	//console.log("z:" + this.submarine.z);
 
+	//Draw Cilindro
+	this.pushMatrix();
+	this.cilindro.display();
+	this.popMatrix();
+
+
+	
+	
 
 	// ---- END Background, camera and axis setup
 
@@ -189,10 +237,11 @@ LightingScene.prototype.display = function() {
 
 
 LightingScene.prototype.update = function(currTime){
+	if(this.enable)
 	this.clock.update(currTime);
 }
 
-LightingScene.prototype.doSomething = function ()
+LightingScene.prototype.Settings = function ()
 {
 	console.log("Doing Something ...");
 };

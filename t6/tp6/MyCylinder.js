@@ -22,6 +22,9 @@
  	* How can the vertices, indices and normals arrays be defined to
  	* build a prism with varying number of slices and stacks?
  	*/
+	
+	var texCoordS = 1 / this.slices;
+    var texCoordT = 1 / this.stacks;
 
 	this.angulo = (2*Math.PI)/this.slices;
 
@@ -56,6 +59,15 @@
  		}
  	}
  	
+ 	 this.texCoords = [];
+        for (i = 0; i <= this.stacks; ++i)
+        {
+            for (j = 0; j <= this.slices; ++j)
+            {
+                this.texCoords.push(j * texCoordS);
+                this.texCoords.push(i * texCoordT);
+            }
+        }
  	
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();

@@ -30,19 +30,27 @@ MyInterface.prototype.init = function(application) {
 	// the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
 	// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); }; 
 
-	this.gui.add(this.scene, 'doSomething');	
+	this.gui.add(this.scene, 'Settings');	
 
 	// add a group of controls (and open/expand by defult)
 	
-	var group=this.gui.addFolder("Options");
+	var group=this.gui.addFolder("Lights");
 	group.open();
 
 	// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 	// e.g. this.option1=true; this.option2=false;
 	
-	group.add(this.scene, 'option1');
-	group.add(this.scene, 'option2');
+	group.add(this.scene, 'ambientLight');
+	group.add(this.scene, 'light_1');
+	group.add(this.scene, 'light_2');
+	group.add(this.scene, 'light_3');
+	group.add(this.scene, 'light_4');
+	group.add(this.scene, 'light_5');
+
 	
+	var group2=this.gui.addFolder("Clock");
+	group2.add(this.scene, 'enable');
+
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;
@@ -71,29 +79,25 @@ MyInterface.prototype.processKeyboard = function(event) {
         //a ou A
         case (65):
         case (97):
-        {
-        this.scene.submarine.handleKeyPressed("a");
-        console.log("Key 'A' pressed");
-        }
+        this.scene.submarine.rotate(1);
         break;
 
         //d ou D
         case (68):
         case (100):
-        this.scene.submarine.handleKeyPressed("d");
+        this.scene.submarine.rotate(0);
         break;
 
         //s ou S
         case (83):
         case (115):
-        this.scene.submarine.handleKeyPressed("s");
+        this.scene.submarine.decreaseVeloc();
         break;
 
         //w ou W
         case (87):
         case (119):
-        this.scene.submarine.handleKeyPressed("w");
+        this.scene.submarine.increaseVeloc();
         break;
-
 	};
 };
