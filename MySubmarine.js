@@ -112,6 +112,7 @@ MySubmarine.prototype.rotate = function(direction) {
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
  	this.z +=(this.speed) *Math.cos(this.dirAngle);
+ 	this.speed *= 0.99;
 
  }
 
