@@ -58,6 +58,14 @@ LightingScene.prototype.init = function(application) {
 	this.light_5 = true;
 	this.enable = true;
 	this.speed = 3;
+
+	this.submarineAppearanceList = [
+	"Yellow",
+	"Grey"
+	];
+
+	this.currSubmarineApperance = 0;
+
 };
 
 LightingScene.prototype.initCameras = function() {
@@ -232,6 +240,14 @@ LightingScene.prototype.display = function() {
 LightingScene.prototype.update = function(currTime){
 	if(this.enable)
 	this.clock.update(currTime);
+
+	if(this.currSubmarineApperance == "Yellow")
+		this.submarine.currentAppearance = 0;
+
+	if(this.currSubmarineApperance == "Grey")
+		this.submarine.currentAppearance = 1;
+
+
 }
 
 LightingScene.prototype.Settings = function ()

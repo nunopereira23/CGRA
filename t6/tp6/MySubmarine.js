@@ -29,9 +29,19 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 
 	this.topSubmarineAppearance = new CGFappearance(scene);
 	this.topSubmarineAppearance.loadTexture("../resources/images/topsphere.png");
+	
 	this.bodySubmarineAppearance = new CGFappearance(scene);
 	this.bodySubmarineAppearance.loadTexture("../resources/images/bodycylinder.png");
 
+	this.submarineAppearance2 = new CGFappearance(scene);
+	this.submarineAppearance2.loadTexture("../resources/images/body2.png");
+	
+	this.currentAppearance = 0;
+	
+	this.submarineAppearances = [
+	this.bodySubmarineAppearance ,
+	this.submarineAppearance2
+	];
 
 	this.initBuffers();
 };
@@ -119,6 +129,10 @@ MySubmarine.prototype.rotate = function(direction) {
 
  }
 
+ MySubmarine.prototype.setApperance = function(apperance){
+
+ }
+
  MySubmarine.prototype.display = function(){
 
  	//Draw submarine front and back
@@ -148,7 +162,7 @@ MySubmarine.prototype.rotate = function(direction) {
 	//Draw cilinder from submarine
 		this.scene.pushMatrix();
 		this.scene.scale(0.73, 0.8, 4.08);	
-		this.bodySubmarineAppearance.apply();	
+		this.submarineAppearances[this.currentAppearance].apply();	
 		this.body.display();
 		this.scene.popMatrix();
 
