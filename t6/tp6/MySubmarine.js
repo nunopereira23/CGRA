@@ -159,13 +159,6 @@ MySubmarine.prototype.rotate = function(direction) {
 		this.scene.popMatrix();
 
 
-	//Draw cilinder from submarine
-		this.scene.pushMatrix();
-		this.scene.scale(0.73, 0.8, 4.08);	
-		this.submarineAppearances[this.currentAppearance].apply();	
-		this.body.display();
-		this.scene.popMatrix();
-
 	
 	//Draw propellers
 		this.scene.pushMatrix();
@@ -248,5 +241,12 @@ MySubmarine.prototype.rotate = function(direction) {
 		this.scene.translate(1,-0.25,0.5);
 		this.scene.scale(0.07,0.07,0.07);
 		this.semi.display();
+		this.scene.popMatrix();
+
+		//Draw cilinder from submarine
+		this.scene.pushMatrix();
+		this.scene.scale(0.73, 0.8, 4.08);	
+		this.submarineAppearances[this.currentAppearance].apply();	
+		this.body.display();
 		this.scene.popMatrix();
  }
