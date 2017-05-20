@@ -22,6 +22,8 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	this.upbody = new MyCylinderV2(scene, 100, 1, true);
 	this.propeller = new MyCylinderV2(scene, 100,1,false);
 	//this.fin = new MyPrism(scene,4,1);
+	this.fin = new MyTrapezoid(scene);
+	//this.horizontalBackFin = new MyTrapezoid(scene);
 
 
 	this.topSubmarineAppearance = new CGFappearance(scene);
@@ -121,13 +123,13 @@ MySubmarine.prototype.rotate = function(direction) {
  	//Draw submarine front and back
 		this.scene.pushMatrix();
 		this.scene.translate(0,0,4.08);
-		this.scene.scale(0.73, 0.94, 0.46);
+		this.scene.scale(0.73, 0.8, 0.46);
 		this.topSubmarineAppearance.apply();
 		this.semi.display();
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
-		this.scene.scale(0.73, 0.94, 0.46);
+		this.scene.scale(0.73, 0.8, 0.46);
 		this.scene.rotate(degToRad*180,1,0,0);
 		this.topSubmarineAppearance.apply();
 		this.semi.display();
@@ -135,7 +137,7 @@ MySubmarine.prototype.rotate = function(direction) {
 
 	//Draw up part from submarin
 		this.scene.pushMatrix();
-		this.scene.scale(0.6, 2, 0.64);
+		this.scene.scale(0.4, 2, 0.64);
 		this.scene.translate(0, 0.8, 2.2);
 		this.scene.rotate(90 * degToRad, 1, 0, 0);
 		this.upbody.display();
@@ -144,7 +146,7 @@ MySubmarine.prototype.rotate = function(direction) {
 
 	//Draw cilinder from submarine
 		this.scene.pushMatrix();
-		this.scene.scale(0.73, 0.94, 4.08);	
+		this.scene.scale(0.73, 0.8, 4.08);	
 		this.bodySubmarineAppearance.apply();	
 		this.body.display();
 		this.scene.popMatrix();
@@ -168,4 +170,33 @@ MySubmarine.prototype.rotate = function(direction) {
 		this.scene.translate(-10,1,1);
 		this.fin.display();
 		this.scene.popMatrix();*/
+
+	//Draw fins
+	  this.scene.pushMatrix();
+	  this.scene.translate(0.05,0,-0.2);
+	  this.scene.rotate(-Math.PI/2,0,1,0);
+	  this.fin.display();
+	  this.scene.popMatrix();
+
+	  this.scene.pushMatrix();
+	  this.scene.translate(0,0.05,-0.2);
+	  this.scene.rotate(Math.PI/2,1,0,0);
+	  this.scene.rotate(Math.PI/2,0,0,1);
+	  this.fin.display();
+	  this.scene.popMatrix();
+
+	  this.scene.pushMatrix();
+
+	  this.scene.translate(0,1.25,1.4);
+	  this.scene.rotate(Math.PI/2,1,0,0);
+	  this.scene.rotate(Math.PI/2,0,0,1);
+	  this.scene.rotate(Math.PI,0,1,0);
+	  this.scene.scale(1,0.6,1);
+	  this.fin.display();
+	  this.scene.popMatrix();
+
+
+
+
+
  }

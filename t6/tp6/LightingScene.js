@@ -37,8 +37,6 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this, 100, 1);
 
-	this.trapezoid = new MyTrapezoid(this);
-
 
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
@@ -211,10 +209,6 @@ LightingScene.prototype.display = function() {
 	//console.log("x:" + this.submarine.x);
 	//console.log("y:" + this.submarine.y);
 	//console.log("z:" + this.submarine.z);
-
-	this.pushMatrix();
-	this.trapezoid.display();
-	this.popMatrix();
 	
 	
 
