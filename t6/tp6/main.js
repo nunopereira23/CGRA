@@ -20,6 +20,7 @@ serialInclude([
 	'MySemiSphere.js',
 	'MyCylinderV2.js',
 	'MyTrapezoid.js',
+	'MyCylint.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

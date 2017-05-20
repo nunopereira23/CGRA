@@ -38,6 +38,7 @@ LightingScene.prototype.init = function(application) {
 	this.poste = new MyCylinder(this, 100, 1);
 
 
+
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
 	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
@@ -210,6 +211,7 @@ LightingScene.prototype.display = function() {
 	//console.log("y:" + this.submarine.y);
 	//console.log("z:" + this.submarine.z);
 	
+
 	
 
 	// ---- END Background, camera and axis setup
