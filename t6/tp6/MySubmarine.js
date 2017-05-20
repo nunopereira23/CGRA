@@ -21,6 +21,7 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	this.body = new MyCylinder(scene,128,1);
 	this.upbody = new MyCylinderV2(scene, 100, 1, true);
 	this.propeller = new MyCylinderV2(scene, 100,1,false);
+	this.helice = new MyUnitCubeQuad(scene);
 	//this.fin = new MyPrism(scene,4,1);
 	this.fin = new MyTrapezoid(scene);
 	//this.horizontalBackFin = new MyTrapezoid(scene);
@@ -29,7 +30,7 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	this.topSubmarineAppearance = new CGFappearance(scene);
 	this.topSubmarineAppearance.loadTexture("../resources/images/topsphere.png");
 	this.bodySubmarineAppearance = new CGFappearance(scene);
-	this.bodySubmarineAppearance.loadTexture("../resources/images/bodyTexture.png");
+	this.bodySubmarineAppearance.loadTexture("../resources/images/bodycylinder.png");
 
 
 	this.initBuffers();
@@ -207,7 +208,31 @@ MySubmarine.prototype.rotate = function(direction) {
 		this.scene.popMatrix();
 
 	   
+	//Draw helices
+		this.scene.pushMatrix();
+		this.scene.translate(-1,-0.25,0.4);
+		this.scene.rotate(-90*degToRad,1,0,0);
+		this.scene.scale(0.6,0.12,0.05);
+		this.helice.display();
+		this.scene.popMatrix();
 
+	
+		this.scene.pushMatrix();
+		this.scene.translate(1,-0.25,0.4);
+		this.scene.rotate(-90*degToRad,1,0,0);
+		this.scene.scale(0.6,0.12,0.05);
+		this.helice.display();
+		this.scene.popMatrix();		
 
+		this.scene.pushMatrix();
+		this.scene.translate(-1,-0.25,0.5);
+		this.scene.scale(0.07,0.07,0.07);
+		this.semi.display();
+		this.scene.popMatrix();
 
+		this.scene.pushMatrix();
+		this.scene.translate(1,-0.25,0.5);
+		this.scene.scale(0.07,0.07,0.07);
+		this.semi.display();
+		this.scene.popMatrix();
  }
