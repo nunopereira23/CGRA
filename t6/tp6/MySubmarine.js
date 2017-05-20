@@ -23,7 +23,7 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	this.propeller = new MyCylinderV2(scene, 100,1,false);
 	//this.fin = new MyPrism(scene,4,1);
 	this.fin = new MyTrapezoid(scene);
-	//this.horizontalBackFin = new MyTrapezoid(scene);
+	
 
 
 	this.topSubmarineAppearance = new CGFappearance(scene);
@@ -195,7 +195,20 @@ MySubmarine.prototype.rotate = function(direction) {
 	  this.fin.display();
 	  this.scene.popMatrix();
 
+	  //Draw Periscope
 
+	 this.scene.pushMatrix();
+	 this.scene.translate(0,1.5,1.75);
+	 this.scene.rotate(-Math.PI/2,1,0,0);
+	 this.scene.scale(0.05,0.05,1);
+	 this.upbody.display();
+	 this.scene.popMatrix();
+
+	 this.scene.pushMatrix();
+	 this.scene.translate(0,2.45,1.75);
+	 this.scene.scale(0.05,0.05,0.2);
+	 this.upbody.display();
+	 this.scene.popMatrix();
 
 
 
