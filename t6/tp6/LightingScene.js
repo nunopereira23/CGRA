@@ -36,9 +36,9 @@ LightingScene.prototype.init = function(application) {
 	this.backgroundz = new Plane(this);
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this, 100, 1);
-	this.cilindro = new MyCylinderV2(this, 100, 1, true);
-	
-	
+
+	this.trapezoid = new MyTrapezoid(this);
+
 
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
@@ -204,7 +204,7 @@ LightingScene.prototype.display = function() {
 	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
 	this.pushMatrix();
 	this.rotate(this.submarine.dirAngle,0,1,0);
-	this.translate(-1,1,1);
+	this.translate(-1.5,1,1);
 	this.submarine.display();
 	this.popMatrix();
 	this.popMatrix();
@@ -212,12 +212,9 @@ LightingScene.prototype.display = function() {
 	//console.log("y:" + this.submarine.y);
 	//console.log("z:" + this.submarine.z);
 
-	//Draw Cilindro
 	this.pushMatrix();
-	this.cilindro.display();
+	this.trapezoid.display();
 	this.popMatrix();
-
-
 	
 	
 

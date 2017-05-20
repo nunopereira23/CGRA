@@ -1,6 +1,5 @@
 var degToRad = Math.PI / 180.0;
 
-
 function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	CGFobject.call(this,scene);
 
@@ -19,13 +18,16 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 
 
 	this.semi = new MySemiSphere(scene, 200,1);
-	this.body = new MyCylinder(scene,100,1);
+	this.body = new MyCylinder(scene,128,1);
+	this.upbody = new MyCylinderV2(scene, 100, 1, true);
+	this.propeller = new MyCylinderV2(scene, 100,1,false);
+	//this.fin = new MyPrism(scene,4,1);
 
 
 	this.topSubmarineAppearance = new CGFappearance(scene);
 	this.topSubmarineAppearance.loadTexture("../resources/images/topsphere.png");
 	this.bodySubmarineAppearance = new CGFappearance(scene);
-	this.bodySubmarineAppearance.loadTexture("../resources/images/body.png");
+	this.bodySubmarineAppearance.loadTexture("../resources/images/bodyTexture.png");
 
 
 	this.initBuffers();
@@ -110,6 +112,7 @@ MySubmarine.prototype.rotate = function(direction) {
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
  	this.z +=(this.speed) *Math.cos(this.dirAngle);
+ 	this.speed *= 0.99;
 
  }
 
@@ -130,11 +133,39 @@ MySubmarine.prototype.rotate = function(direction) {
 		this.semi.display();
 		this.scene.popMatrix();
 
+	//Draw up part from submarin
+		this.scene.pushMatrix();
+		this.scene.scale(0.6, 2, 0.64);
+		this.scene.translate(0, 0.8, 2.2);
+		this.scene.rotate(90 * degToRad, 1, 0, 0);
+		this.upbody.display();
+		this.scene.popMatrix();
+
+
 	//Draw cilinder from submarine
 		this.scene.pushMatrix();
 		this.scene.scale(0.73, 0.94, 4.08);	
 		this.bodySubmarineAppearance.apply();	
 		this.body.display();
-		this.scene.popMatrix;
+		this.scene.popMatrix();
 
+	
+	//Draw propellers
+		this.scene.pushMatrix();
+		this.scene.scale(0.3, 0.3, 0.3);
+		this.scene.translate(-3.35, -0.8, 1);
+		this.propeller.display();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.scale(0.3, 0.3, 0.3);
+		this.scene.translate(3.35, -0.8, 1);
+		this.propeller.display();
+		this.scene.popMatrix();
+
+	/*  Draw fins
+		this.scene.pushMatrix();
+		this.scene.translate(-10,1,1);
+		this.fin.display();
+		this.scene.popMatrix();*/
  }
