@@ -167,31 +167,46 @@ MySubmarine.prototype.rotate = function(direction) {
 
 
 	//Draw fins
-	  this.scene.pushMatrix();
-	  this.scene.translate(0.05,0,-0.3);
-	  this.scene.rotate(-Math.PI/2,0,1,0);
-	  this.scene.scale(1.5,1,1);
-	  this.fin.display();
-	  this.scene.popMatrix();
+		this.scene.pushMatrix();
+		this.scene.translate(0.05,0,-0.3);
+		this.scene.rotate(-Math.PI/2,0,1,0);
+		this.scene.scale(1.5,1,1);
+		this.fin.display();
+		this.scene.popMatrix();
 
-	  this.scene.pushMatrix();
-	  this.scene.translate(0,0.05,-0.3);
-	  this.scene.rotate(Math.PI/2,1,0,0);
-	  this.scene.rotate(Math.PI/2,0,0,1);
-	  this.scene.scale(1.5,1,1);
-	  this.fin.display();
-	  this.scene.popMatrix();
+		this.scene.pushMatrix();
+		this.scene.translate(0,0.05,-0.3);
+		this.scene.rotate(Math.PI/2,1,0,0);
+		this.scene.rotate(Math.PI/2,0,0,1);
+		this.scene.scale(1.5,1,1);
+		this.fin.display();
+		this.scene.popMatrix();
 
-	  this.scene.pushMatrix();
-	  this.scene.translate(0,1.25,1.4);
-	  this.scene.rotate(Math.PI/2,1,0,0);
-	  this.scene.rotate(Math.PI/2,0,0,1);
-	  this.scene.rotate(Math.PI,0,1,0);
-	  this.scene.scale(1.5,0.7,1);
-	  this.fin.display();
-	  this.scene.popMatrix();
+		this.scene.pushMatrix();
+		this.scene.translate(0,1.25,1.4);
+		this.scene.rotate(Math.PI/2,1,0,0);
+		this.scene.rotate(Math.PI/2,0,0,1);
+		this.scene.rotate(Math.PI,0,1,0);
+		this.scene.scale(1.5,0.7,1);
+		this.fin.display();
+		this.scene.popMatrix();
 
+	  //Draw Periscope 
+ 
+		this.scene.pushMatrix(); 
+		this.scene.translate(0,1.5,1.75); 
+		this.scene.rotate(-Math.PI/2,1,0,0); 
+		this.scene.scale(0.05,0.05,1); 
+		this.upbody.display(); 
+		this.scene.popMatrix(); 
 
+		this.scene.pushMatrix(); 
+		this.scene.translate(0,2.45,1.75); 
+		this.scene.scale(0.05,0.05,0.2); 
+		this.upbody.display(); 
+		this.scene.popMatrix();
+
+	   
 
 
 
