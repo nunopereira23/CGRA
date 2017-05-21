@@ -1,6 +1,6 @@
 var degToRad = Math.PI / 180.0;
 
-function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
+function MySubmarine(scene, x=0, y=0, z=0) {
 	CGFobject.call(this,scene);
 
     this.x=x;
@@ -14,11 +14,14 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	this.rotSpeed=0.05;
 	this.rotAccel=0.05;
 	
-	this.declination=degToRad * declination;
+	this.declination=degToRad * 0;
 	this.angleSpeed=0;
 
 	this.heliceAngle = 0;
 	this.finAngle = 0;
+
+	this.up=0;
+	this.down=0;
 
 	this.semi = new MySemiSphere(scene, 200,1);
 	this.body = new MyCylinder(scene,128,1);
@@ -124,14 +127,26 @@ MySubmarine.prototype.rotate = function(direction) {
 	}
 }
 
+MySubmarine.prototype.setDeclination(direction){
+	if (this.direction==0){
+		this.down=1;
+	}
+	else
+	{
+		this.up=1;
+	} 
+}
+
 MySubmarine.prototype.dive = function(direction) {
 	// 0 -> down
 	if (direction == 0) {
+		this.down=1;
 		this.declination -= Math.sin(this.angleSpeed * this.degToRad);
 		if (this.declination < -25)
 		this.declination = -25;
 	}
 	else {
+		this.up=1;
 		this.declination += Math.sin(this.angleSpeed * this.degToRad);
 		if (this.declination > 25)
 		this.declination = 25;
@@ -147,6 +162,23 @@ MySubmarine.prototype.dive = function(direction) {
  	this.z +=(this.speed) * Math.cos(this.dirAngle);
  	//this.speed *= 0.99;
 
+	if(this.up==1){
+		if(angleSpeed>=25)
+		angleSpeed=25;
+		else {
+			this.submarine.angleSpeed += 1;
+			this.dive(1);
+	}
+	}	
+
+	if(this.down==1){
+		if(angleSpeed<=-25)
+		angleSpeed=-25;
+		else {
+			this.submarine.angleSpeed -= 1;
+			this.dive(0);
+		}
+	}
  	this.heliceAngle += this.speed/0.05 * (1/100) * 360;
 
  }
