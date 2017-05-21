@@ -48,6 +48,8 @@ LightingScene.prototype.init = function(application) {
 	this.postAppearance = new CGFappearance(this);
 	this.postAppearance.loadTexture("../resources/images/postTexture.png");
 	
+	this.torpedoAppearance = new CGFappearance(this);
+	this.torpedoAppearance.loadTexture("../resources/images/metalTexture.png");
 	
 	this.materialDefault = new CGFappearance(this);
 	this.setUpdatePeriod(100);
@@ -232,7 +234,9 @@ LightingScene.prototype.display = function() {
 
 	//Draw torpedo
 	this.pushMatrix();
+	this.translate(3,1,1);
 	this.scale(1.5,1,1);
+	this.torpedoAppearance.apply();
 	this.torpedo.display();
 	this.popMatrix();
 
