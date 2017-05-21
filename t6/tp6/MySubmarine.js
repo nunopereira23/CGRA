@@ -8,6 +8,7 @@ function MySubmarine(scene, x=0, y=0, z=0) {
     this.z=z;
 
     this.dirAngle=degToRad*90;
+    this.upDown=degToRad*90;
 
     this.speed=0.00;
     this.accel=0.05;
@@ -20,8 +21,8 @@ function MySubmarine(scene, x=0, y=0, z=0) {
 	this.heliceAngle = 0;
 	this.finAngle = 0;
 
-	this.up=0;
-	this.down=0;
+	//this.up=0;
+	//this.down=0;
 
 	this.semi = new MySemiSphere(scene, 200,1);
 	this.body = new MyCylinder(scene,128,1);
@@ -128,18 +129,30 @@ MySubmarine.prototype.rotate = function(direction) {
 }
 
 MySubmarine.prototype.setDeclination = function(direction){
-	if (this.direction==0){
+	/*if (this.direction==0){
 		this.down=1;
 	}
 	else
 	{
 		this.up=1;
-	} 
+	} */
 }
 
 MySubmarine.prototype.dive = function(direction) {
 	// 0 -> down
-	if (direction == 0) {
+
+	if(direction==0){
+		this.upDown-=this.rotSpeed;
+ 		this.upDown %= degToRad*360;
+ 		//this.finAngle = 45;
+	}
+	else{
+		this.upDown+=this.rotSpeed;
+ 		if(this.upDown<0)
+ 		this.upDown=360 * degToRad * upDown-this.rotSpeed;
+ 		//this.finAngle = -45;
+	}
+	/*if (direction == 0) {
 		this.down=1;
 		this.declination -= Math.sin(this.angleSpeed * this.degToRad);
 		if (this.declination < -25)
@@ -150,7 +163,8 @@ MySubmarine.prototype.dive = function(direction) {
 		this.declination += Math.sin(this.angleSpeed * this.degToRad);
 		if (this.declination > 25)
 		this.declination = 25;
-	}
+	}*/
+
 }
 
 
@@ -159,24 +173,24 @@ MySubmarine.prototype.dive = function(direction) {
 
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
- 	this.y += Math.sin(this.dirAngle+-90*degToRad);
+ 	this.y += Math.sin(this.upDown+-90*degToRad);
  	this.z +=(this.speed) * Math.cos(this.dirAngle);
  	//this.speed *= 0.99;
 
 	if(this.up==1){
-		if(angleSpeed>=25)
-		angleSpeed=25;
+		if(this.angleSpeed>=25)
+		this.angleSpeed=25;
 		else {
-			this.submarine.angleSpeed += 1;
+			this.angleSpeed += 1;
 			this.dive(1);
 	}
 	}	
 
 	if(this.down==1){
-		if(angleSpeed<=-25)
-		angleSpeed=-25;
+		if(this.angleSpeed<=-25)
+		this.angleSpeed=-25;
 		else {
-			this.submarine.angleSpeed -= 1;
+			this.angleSpeed -= 1;
 			this.dive(0);
 		}
 	}
