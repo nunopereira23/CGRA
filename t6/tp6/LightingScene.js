@@ -36,10 +36,12 @@ LightingScene.prototype.init = function(application) {
 	this.backgroundz = new Plane(this);
 	this.submarine = new MySubmarine(this, 3 ,2 ,5);
 	this.poste = new MyCylinder(this, 100, 1);
-	this.target = new MyTarget(this,-5,2,2);
+	//this.target = new MyTarget(this,-5,2,2);
+	
+
+	this.targets = [new MyTarget(this, 10, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
 	this.torpedo = new MyTorpedo(this, this.submarine);
 
-	this.targets = [new MyTarget(this, -5, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
 
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
@@ -224,10 +226,13 @@ LightingScene.prototype.display = function() {
 	
 
 	// Draw targets
-	/*this.pushMatrix();
-	for (i = 0; i < this.targets.length; i++)
+	
+	for (i = 0; i < this.targets.length; i++){
+		this.pushMatrix();
 		this.targets[i].display();
-	this.popMatrix();*/
+		this.popMatrix();
+	}	
+	
 
 
 	//Draw torpedo
@@ -257,8 +262,10 @@ LightingScene.prototype.display = function() {
 };
 
 LightingScene.prototype.positionTorpedo = function(){
-	this.torpedo = new MyTorpedo(this, this.submarine);
-	this.drawTorpedo = true;
+	if (this.targets.length != 0){
+		this.torpedo = new MyTorpedo(this, this.submarine);
+		this.drawTorpedo = true;
+	}
 }
 
 
@@ -268,6 +275,9 @@ LightingScene.prototype.update = function(currTime){
 		this.clock.update(currTime);
 	}
 	this.submarine.update(currTime);
+	if (this.drawTorpedo == true){
+		this.torpedo.update(currTime);
+	}
 	if(this.currSubmarineApperance == "Yellow")
 		this.submarine.currentAppearance = 0;
 

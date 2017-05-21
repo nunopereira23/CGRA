@@ -19,6 +19,7 @@ MyTarget.prototype.constructor = MyTarget;
 MyTarget.prototype.display = function () {
 
 this.scene.pushMatrix();
+this.scene.translate(this.pos_x,this.pos_y,this.pos_z);
 this.targetAppearance.apply();
 this.body.display();
 this.scene.popMatrix();
