@@ -127,7 +127,7 @@ MySubmarine.prototype.rotate = function(direction) {
 	}
 }
 
-MySubmarine.prototype.setDeclination(direction){
+MySubmarine.prototype.setDeclination = function(direction){
 	if (this.direction==0){
 		this.down=1;
 	}
@@ -151,7 +151,7 @@ MySubmarine.prototype.dive = function(direction) {
 		if (this.declination > 25)
 		this.declination = 25;
 	}
-};
+}
 
 
  MySubmarine.prototype.update = function(currTime){
