@@ -21,6 +21,7 @@ serialInclude([
 	'MyCylinderV2.js',
 	'MyTrapezoid.js',
 	'MyCylint.js',
+	'MyTarget.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
