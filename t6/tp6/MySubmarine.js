@@ -120,7 +120,7 @@ MySubmarine.prototype.decreaseVeloc = function(){
 
 MySubmarine.prototype.decPeriscope = function () {
 	if ( this.periscopeHeight >= 0)
-		this.periscopeHeight -= 0.1;
+		this.periscopeHeight -= 0.01;
 	else{
 		this.periscopeHeight = 0;
 		this.periscopeDown = 0;
@@ -130,7 +130,7 @@ MySubmarine.prototype.decPeriscope = function () {
 
 MySubmarine.prototype.incPeriscope = function () {
 	if ( this.periscopeHeight < 1)
-		this.periscopeHeight += 0.1;
+		this.periscopeHeight += 0.01;
 	else{
 		this.periscopeHeight = 1;
 		this.periscopeUp = 0;
