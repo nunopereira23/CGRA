@@ -159,6 +159,7 @@ MySubmarine.prototype.dive = function(direction) {
 
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
+ 	this.y += Math.sin(this.dirAngle+-90*degToRad);
  	this.z +=(this.speed) * Math.cos(this.dirAngle);
  	//this.speed *= 0.99;
 
