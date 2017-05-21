@@ -25,6 +25,9 @@
 
 	this.angulo = (2*Math.PI)/this.slices;
 
+	var texCoordS = 1 / this.slices;
+    var texCoordT = 1 / this.stacks;
+
 	this.height = 1.0/this.stacks;
 
  	this.vertices = [];
@@ -53,6 +56,25 @@
  		}
  	}
  	
+ 	this.texCoords = [];
+        for (i = 0; i < this.stacks; i++)
+        {
+            for (j = 0; j <= this.slices; j++)
+            {
+                this.texCoords.push(j * texCoordS);
+                this.texCoords.push(i * texCoordT);
+
+                this.texCoords.push((j+1) * texCoordS);
+                this.texCoords.push(i * texCoordT);
+
+                this.texCoords.push(j * texCoordS);
+                this.texCoords.push((i+1) * texCoordT);
+
+                this.texCoords.push((j+1) * texCoordS);
+                this.texCoords.push((i+1) * texCoordT);
+
+            }
+        }
  	
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
