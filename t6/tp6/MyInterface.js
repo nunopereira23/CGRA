@@ -118,12 +118,12 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (76):
 		case (108):
 			console.log("Key 'L' pressed");
-			this.scene.submarine.periscopeHeight=0;
+			this.scene.submarine.periscopeDown=1;
 			break;
 		case (80):
 		case (112):
 			console.log("Key 'P' pressed");
-			this.scene.submarine.periscopeHeight=1;
+			this.scene.submarine.periscopeUp=1;
 			break;
 	};
 };
