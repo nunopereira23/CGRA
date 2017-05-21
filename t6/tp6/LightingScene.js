@@ -34,10 +34,9 @@ LightingScene.prototype.init = function(application) {
 	this.background = new Plane(this);
 	this.backgroundy = new Plane(this);
 	this.backgroundz = new Plane(this);
-	this.submarine = new MySubmarine(this);
+	this.submarine = new MySubmarine(this, 3 ,2 ,5);
 	this.poste = new MyCylinder(this, 100, 1);
 	this.target = new MyTarget(this,-5,2,2);
-	this.torpedo = new MyTorpedo(this, this.submarine);
 
 	this.targets = [new MyTarget(this, -5, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
 
@@ -69,6 +68,8 @@ LightingScene.prototype.init = function(application) {
 	];
 
 	this.currSubmarineApperance = 0;
+
+	this.drawTorpedo = false;
 
 };
 
@@ -210,15 +211,11 @@ LightingScene.prototype.display = function() {
 	this.clock.display();
 	this.popMatrix();
 
-	// Draw submarine
-	this.pushMatrix();
-	this.translate(3,2,5);
-	
+	// Draw submarine	
 	this.pushMatrix();
 	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
 	this.rotate(this.submarine.dirAngle,0,1,0);
 	this.submarine.display();
-	this.popMatrix();
 	this.popMatrix();
 	//console.log("x:" + this.submarine.x);
 	//console.log("y:" + this.submarine.y);
@@ -226,19 +223,25 @@ LightingScene.prototype.display = function() {
 	
 
 	// Draw targets
-	this.pushMatrix();
+	/*this.pushMatrix();
 	for (i = 0; i < this.targets.length; i++)
 		this.targets[i].display();
-	this.popMatrix();
+	this.popMatrix();*/
 
 
 	//Draw torpedo
-	this.pushMatrix();
-	this.translate(3,1,1);
-	this.scale(1.5,1,1);
-	this.torpedoAppearance.apply();
-	this.torpedo.display();
-	this.popMatrix();
+
+	if (this.drawTorpedo == true){
+		this.torpedo = new MyTorpedo(this, this.submarine);
+		this.pushMatrix();
+		this.translate(this.torpedo.x, this.torpedo.y, this.torpedo.z);
+		this.rotate(this.torpedo.rot,0,1,0);
+		this.torpedoAppearance.apply();
+		this.torpedo.display();
+		this.popMatrix();
+	}
+	
+
 
 	// ---- END Background, camera and axis setup
 
@@ -252,6 +255,10 @@ LightingScene.prototype.display = function() {
 
 	// ---- END Primitive drawing section
 };
+
+LightingScene.prototype.positionTorpedo = function(){
+	
+}
 
 
 

@@ -4,11 +4,11 @@ function MyTorpedo(scene, submarine) {
 	CGFobject.call(this, scene);
 
 
-	this.x = submarine.x;
-	this.y = submarine.y + 1;
+	this.x = submarine.x;// + 1;
+	this.y = submarine.y;// - 1;
 	this.z = submarine.z;
-	this.rot = submarine.angleSpeed;
-	this.decline = submarine.upDown;
+	this.rot = submarine.dirAngle;
+
 
 
 	this.target = this.scene.target;
@@ -25,12 +25,16 @@ MyTorpedo.prototype = Object.create(CGFobject.prototype);
 MyTorpedo.prototype.constructor = MyTorpedo;
 
 MyTorpedo.prototype.display = function () {
-
-this.scene.translate(2,2,2);
+	
+	//this.scene.translate(2,2,2);
 	//this.scene.translate(submarine.x, submarine.y, submarine.z);
 	this.scene.pushMatrix();
-	this.scene.rotate(this.rot, 0, 1, 0);
-	this.scene.rotate(this.decline, 1, 0, 0);
+	this.scene.rotate(-Math.PI/2,0,1,0);
+	this.scene.scale(1.5,1,1);
+	this.scene.translate(1,-1,0);
+	this.scene.pushMatrix();
+	//this.scene.rotate(this.rot, 0, 1, 0);
+	//this.scene.rotate(this.decline, 1, 0, 0);
     this.scene.pushMatrix();
 	this.scene.rotate(-90*degToRad, 0, 1, 0);
 	this.scene.scale(0.22, 0.22, 0.15);
@@ -67,6 +71,8 @@ this.scene.translate(2,2,2);
 	this.scene.translate(-0.2, 0, -0.05);
     this.fin.display();
     this.scene.popMatrix();
+	this.scene.popMatrix();
+
 	this.scene.popMatrix();
 
 }

@@ -126,6 +126,10 @@ MyInterface.prototype.processKeyboard = function(event) {
 			console.log("Key 'P' pressed");
 			this.scene.submarine.periscopeUp=1;
 			break;
+		case(70):
+		case(102):
+			this.scene.drawTorpedo = true;
+			break;
 	};
 };
 
