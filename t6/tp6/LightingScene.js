@@ -208,10 +208,11 @@ LightingScene.prototype.display = function() {
 
 	// Draw submarine
 	this.pushMatrix();
-	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
+	this.translate(3,2,5);
+	
 	this.pushMatrix();
+	this.translate(this.submarine.x, this.submarine.y, this.submarine.z);
 	this.rotate(this.submarine.dirAngle,0,1,0);
-	this.translate(-1.5,1,1);
 	this.submarine.display();
 	this.popMatrix();
 	this.popMatrix();
