@@ -22,6 +22,7 @@ serialInclude([
 	'MyTrapezoid.js',
 	'MyCylint.js',
 	'MyTarget.js',
+	'MyPrismV2.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

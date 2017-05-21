@@ -40,6 +40,7 @@ LightingScene.prototype.init = function(application) {
 
 
 
+
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
 	this.backgroundAppearance.setTextureWrap('REPEAT','REPEAT');
@@ -237,6 +238,7 @@ LightingScene.prototype.display = function() {
 	this.translate(2,5,3);
 	this.target.display();
 	this.popMatrix();
+
 
 
 	// ---- END Background, camera and axis setup
