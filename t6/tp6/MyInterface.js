@@ -51,14 +51,16 @@ MyInterface.prototype.init = function(application) {
 	var group2=this.gui.addFolder("Clock");
 	group2.add(this.scene, 'enable');
 
+	var group3=this.gui.addFolder("Submarine");
+	group3.add(this.scene, 'currSubmarineApperance', this.scene.submarineAppearanceList);
+
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
 	this.gui.add(this.scene, 'speed', -5, 5);
-
-	this.gui.add(this.scene, 'currSubmarineApperance', this.scene.submarineAppearanceList)
+	
 
 	return true;
 };
