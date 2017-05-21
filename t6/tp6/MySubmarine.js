@@ -175,13 +175,13 @@ MySubmarine.prototype.dive = function(direction) {
 	if(direction==0){ 
 		this.upDown-=this.rotSpeed; 
 		 this.upDown %= degToRad*360; 
-		 this.horFinAngle = 45; 
+		 //this.horFinAngle = 45; 
 	  } 
 	  else{ 
 		this.upDown+=this.rotSpeed; 
 		 if(this.upDown<0) 
 		 this.upDown=360 * degToRad * this.upDown-this.rotSpeed; 
-		 this.horFinAngle = -45; 
+		 //this.horFinAngle = -45; 
 	  } 
 	/*if (direction == 0) {
 		this.down=1;
@@ -237,6 +237,11 @@ MySubmarine.prototype.dive = function(direction) {
 
  	if (this.upDown==degToRad*90)
  		this.horFinAngle = 0;
+ 	else if (this.upDown < degToRad * 90)
+ 		this.horFinAngle = 45;
+ 	else if (this.upDown > degToRad * 90)
+ 		this.horFinAngle = - 45;
+ 	
 
  }
 
