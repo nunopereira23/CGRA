@@ -13,9 +13,13 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
     this.accel=0.05;
 	this.rotSpeed=0.05;
 	this.rotAccel=0.05;
+	
+
 
     this.declination=degToRad * declination;
 
+	this.heliceAngle = 0;
+	this.finAngle = 0;
 
 	this.semi = new MySemiSphere(scene, 200,1);
 	this.body = new MyCylinder(scene,128,1);
@@ -111,27 +115,29 @@ MySubmarine.prototype.rotate = function(direction) {
 	if(direction==0){
 		this.dirAngle-=this.rotSpeed;
  		this.dirAngle %= degToRad*360;
+ 		this.finAngle = 45;
 	}
 	else{
 		this.dirAngle+=this.rotSpeed;
  		if(this.dirAngle<0)
  		this.dirAngle=360 * degToRad * dirAngle-this.rotSpeed;
+ 		this.finAngle = -45;
 	}
 }
+
 
  MySubmarine.prototype.update = function(currTime){
 
 
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
- 	this.z +=(this.speed) *Math.cos(this.dirAngle);
- 	this.speed *= 0.99;
+ 	this.z +=(this.speed) * Math.cos(this.dirAngle);
+ 	//this.speed *= 0.99;
+
+ 	this.heliceAngle += this.speed/0.05 * (1/100) * 360;
 
  }
 
- MySubmarine.prototype.setApperance = function(apperance){
-
- }
 
  MySubmarine.prototype.display = function(){
 
@@ -176,7 +182,9 @@ MySubmarine.prototype.rotate = function(direction) {
 
 	//Draw fins
 		this.scene.pushMatrix();
-		this.scene.translate(0.05,0,-0.3);
+		this.scene.translate(0,0,-0.1);
+		this.scene.rotate(this.finAngle*degToRad,0,1,0);
+		this.scene.translate(0.05,0,-0.2);
 		this.scene.rotate(-Math.PI/2,0,1,0);
 		this.scene.scale(1.5,1,1);
 		this.fin.display();
@@ -218,6 +226,7 @@ MySubmarine.prototype.rotate = function(direction) {
 	//Draw helices
 		this.scene.pushMatrix();
 		this.scene.translate(-1,-0.25,0.4);
+		this.scene.rotate(this.heliceAngle * degToRad,0,0,1);
 		this.scene.rotate(-90*degToRad,1,0,0);
 		this.scene.scale(0.6,0.12,0.05);
 		this.helice.display();
@@ -226,6 +235,7 @@ MySubmarine.prototype.rotate = function(direction) {
 	
 		this.scene.pushMatrix();
 		this.scene.translate(1,-0.25,0.4);
+		this.scene.rotate(this.heliceAngle * degToRad,0,0,1);
 		this.scene.rotate(-90*degToRad,1,0,0);
 		this.scene.scale(0.6,0.12,0.05);
 		this.helice.display();

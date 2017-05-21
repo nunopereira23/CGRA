@@ -75,8 +75,48 @@ MyInterface.prototype.processKeyboard = function(event) {
 	// or use String.fromCharCode(event.keyCode) to compare chars
 	
 	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
-	
+    
     switch (event.keyCode)
+    {
+        //a ou A
+        case (65):
+        case (97):
+        this.scene.submarine.rotate(1);
+        break;
+
+        //d ou D
+        case (68):
+        case (100):
+        console.log ("fui eu que escrevi" + event.type);
+        this.scene.submarine.rotate(0);
+        break;
+
+        //s ou S
+        case (83):
+        case (115):
+        this.scene.submarine.decreaseVeloc();
+        break;
+
+        //w ou W
+        case (87):
+        case (119):
+        this.scene.submarine.increaseVeloc();
+        break;
+        //
+	};
+};
+
+MyInterface.prototype.processKeyUp = function(event) {
+	// call CGFinterface default code (omit if you want to override)
+	CGFinterface.prototype.processKeyUp.call(this,event);
+	
+	// Check key codes e.g. here: http://www.asciitable.com/
+	// or use String.fromCharCode(event.keyCode) to compare chars
+	
+	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
+    
+    this.scene.submarine.finAngle= 0;
+    /*switch (event.keyCode)
     {
         //a ou A
         case (65):
@@ -101,5 +141,6 @@ MyInterface.prototype.processKeyboard = function(event) {
         case (119):
         this.scene.submarine.increaseVeloc();
         break;
-	};
+        //
+	};*/
 };
