@@ -138,13 +138,19 @@ MySubmarine.prototype.rotate = function(direction) {
 	if(direction==0){
 		this.dirAngle-=this.rotSpeed;
  		this.dirAngle %= degToRad*360;
- 		this.finAngle = 45;
+ 		if (this.speed >=0)
+ 			this.finAngle = 45;
+ 		else
+ 			this.finAngle = -45;
 	}
 	else{
 		this.dirAngle+=this.rotSpeed;
  		if(this.dirAngle<0)
- 		this.dirAngle=360 * degToRad * this.dirAngle-this.rotSpeed;
- 		this.finAngle = -45;
+ 		this.dirAngle=360 * degToRad * dirAngle-this.rotSpeed;
+ 		if (this.speed >=0)
+ 			this.finAngle = -45;
+ 		else
+ 			this.finAngle = 45;
 	}
 }
 
