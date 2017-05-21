@@ -36,7 +36,7 @@ LightingScene.prototype.init = function(application) {
 	this.backgroundz = new Plane(this);
 	this.submarine = new MySubmarine(this, 3 ,2 ,5);
 	this.poste = new MyCylinder(this, 100, 1);
-	//this.target = new MyTarget(this,-5,2,2);
+	
 	
 
 	this.targets = [new MyTarget(this, 10, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
@@ -220,9 +220,6 @@ LightingScene.prototype.display = function() {
 	this.rotate(this.submarine.dirAngle,0,1,0);
 	this.submarine.display();
 	this.popMatrix();
-	//console.log("x:" + this.submarine.x);
-	//console.log("y:" + this.submarine.y);
-	//console.log("z:" + this.submarine.z);
 	
 
 	// Draw targets

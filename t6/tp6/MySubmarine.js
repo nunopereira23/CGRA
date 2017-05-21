@@ -63,40 +63,7 @@ function MySubmarine(scene, x=0, y=0, z=0) {
 MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor=MySubmarine;
 
-/*MySubmarine.prototype.initBuffers = function () {
-	this.vertices = [
-            0.5, 0.3, 0.0,
-            -0.5, 0.3, 0.0,
-            0.0, 0.3, 2
-			];
 
-
- 	this.indices = [
- 	0, 1, 2,
- 	2, 1, 0
- 	];
-
-    this.normals = [
-    0, 0, 1,
-    0, 0, 1,
-    0, 0, 1,
-    ]
-    
-  this.texCoords = [
-    this.minS, this.maxT, //(0,1)
-    this.maxS,  this.maxT, //(1,1)
-    this.minS,  this.minT  
-    ]
-
-
-
-
-
-
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
-*/
 
  MySubmarine.prototype.increaseVeloc = function(){
 	
