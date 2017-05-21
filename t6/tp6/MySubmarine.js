@@ -6,9 +6,10 @@ function MySubmarine(scene, x=0, y=0, z=0) {
     this.x=x;
     this.y=y;
     this.z=z;
+    this.periscopeHeight = 0;
+
 
     this.dirAngle=degToRad*90;
-    this.upDown=degToRad*90;
 
     this.speed=0.00;
     this.accel=0.05;
@@ -21,12 +22,16 @@ function MySubmarine(scene, x=0, y=0, z=0) {
 	this.heliceAngle = 0;
 	this.finAngle = 0;
 
-	//this.up=0;
-	//this.down=0;
+	this.up=0;
+	this.down=0;
+	this.periscopeUp=0;
+	this.periscopeDown=0;
 
 	this.semi = new MySemiSphere(scene, 200,1);
 	this.body = new MyCylinder(scene,128,1);
 	this.upbody = new MyCylinderV2(scene, 100, 1, true);
+	this.periscope = new MyCylinderV2(scene, 100, 1, true);
+	this.periscope2 = new MyCylinderV2(scene, 100, 1, true);
 	this.propeller = new MyCylinderV2(scene, 100,1,false);
 	this.helice = new MyUnitCubeQuad(scene);
 	//this.fin = new MyPrism(scene,4,1);
@@ -111,6 +116,20 @@ MySubmarine.prototype.decreaseVeloc = function(){
     }
 }
 
+MySubmarine.prototype.decPeriscope = function () {
+	if ( this.periscopeHeight >= 0)
+		this.periscopeHeight -= 0.1;
+	else
+		this.periscopeHeight = 0;
+}
+
+MySubmarine.prototype.incPeriscope = function () {
+	if ( this.periscopeHeight < 1)
+		this.periscopeHeight += 0.1;
+	else
+		this.periscopeHeight = 1;
+}
+
 MySubmarine.prototype.rotate = function(direction) {
 
 	//direction=0 ->right
@@ -129,30 +148,18 @@ MySubmarine.prototype.rotate = function(direction) {
 }
 
 MySubmarine.prototype.setDeclination = function(direction){
-	/*if (this.direction==0){
+	if (this.direction==0){
 		this.down=1;
 	}
 	else
 	{
 		this.up=1;
-	} */
+	} 
 }
 
 MySubmarine.prototype.dive = function(direction) {
 	// 0 -> down
-
-	if(direction==0){
-		this.upDown-=this.rotSpeed;
- 		this.upDown %= degToRad*360;
- 		//this.finAngle = 45;
-	}
-	else{
-		this.upDown+=this.rotSpeed;
- 		if(this.upDown<0)
- 		this.upDown=360 * degToRad * upDown-this.rotSpeed;
- 		//this.finAngle = -45;
-	}
-	/*if (direction == 0) {
+	if (direction == 0) {
 		this.down=1;
 		this.declination -= Math.sin(this.angleSpeed * this.degToRad);
 		if (this.declination < -25)
@@ -163,8 +170,7 @@ MySubmarine.prototype.dive = function(direction) {
 		this.declination += Math.sin(this.angleSpeed * this.degToRad);
 		if (this.declination > 25)
 		this.declination = 25;
-	}*/
-
+	}
 }
 
 
@@ -173,28 +179,36 @@ MySubmarine.prototype.dive = function(direction) {
 
 
  	this.x += (this.speed) * Math.sin(this.dirAngle);
- 	this.y += Math.sin(this.upDown+-90*degToRad);
+ 	this.y += Math.sin(this.dirAngle+-90*degToRad);
  	this.z +=(this.speed) * Math.cos(this.dirAngle);
  	//this.speed *= 0.99;
 
 	if(this.up==1){
-		if(this.angleSpeed>=25)
-		this.angleSpeed=25;
+		if(angleSpeed>=25)
+		angleSpeed=25;
 		else {
-			this.angleSpeed += 1;
+			this.submarine.angleSpeed += 1;
 			this.dive(1);
 	}
 	}	
 
 	if(this.down==1){
-		if(this.angleSpeed<=-25)
-		this.angleSpeed=-25;
+		if(angleSpeed<=-25)
+		angleSpeed=-25;
 		else {
-			this.angleSpeed -= 1;
+			this.submarine.angleSpeed -= 1;
 			this.dive(0);
 		}
 	}
  	this.heliceAngle += this.speed/0.05 * (1/100) * 360;
+
+ 	if(this.periscopeDown==1){
+ 		decPeriscope();
+ 	}
+
+ 	if(this.periscopeUp==1){
+ 		incPeriscope();
+ 	}
 
  }
 
@@ -272,14 +286,14 @@ MySubmarine.prototype.dive = function(direction) {
 		this.scene.pushMatrix(); 
 		this.scene.translate(0,1.5,1.75); 
 		this.scene.rotate(-Math.PI/2,1,0,0); 
-		this.scene.scale(0.05,0.05,1); 
-		this.upbody.display(); 
+		this.scene.scale(0.05,0.05,0.7 + this.periscopeHeight); 
+		this.periscope.display(); 
 		this.scene.popMatrix(); 
 
 		this.scene.pushMatrix(); 
-		this.scene.translate(0,2.45,1.75); 
+		this.scene.translate(0,2.15+this.periscopeHeight,1.75); 
 		this.scene.scale(0.05,0.05,0.2); 
-		this.upbody.display(); 
+		this.periscope2.display(); 
 		this.scene.popMatrix();
 
 	   

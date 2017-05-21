@@ -106,13 +106,22 @@ MyInterface.prototype.processKeyboard = function(event) {
         case (81):
         case(113):
 			console.log("Key 'Q' pressed");
-			this.scene.submarine.dive(1);
+			this.submarine.setDeclination(1);
 			break;
 
 		case (69):
 		case(101):
 			console.log("Key 'E' pressed");
-			this.scene.submarine.dive(0);
+			this.submarine.setDeclination(0);
+			break;
+
+		case (76):
+			console.log("Key 'L' pressed");
+			this.scene.submarine.periscopeDown=1;
+			break;
+		case (80):
+			console.log("Key 'P' pressed");
+			this.scene.submarine.periscopeUp=1;
 			break;
 	};
 };
