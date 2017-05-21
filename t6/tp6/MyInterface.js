@@ -102,7 +102,22 @@ MyInterface.prototype.processKeyboard = function(event) {
         case (119):
         this.scene.submarine.increaseVeloc();
         break;
-        //
+        
+        case (81):
+			console.log("Key 'Q' pressed");
+			if(angleSpeed>=25)
+			angleSpeed=25;
+			else this.submarine.angleSpeed += 1;
+			this.submarine.dive(1);
+			break;
+
+		case (69):
+			console.log("Key 'E' pressed");
+			if(angleSpeed<=-25)
+			angleSpeed=-25;
+			else this.submarine.angleSpeed -= 1;
+			this.submarine.dive(0);
+			break;
 	};
 };
 

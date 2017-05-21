@@ -14,9 +14,8 @@ function MySubmarine(scene, x=0, y=0, z=0, declination=0) {
 	this.rotSpeed=0.05;
 	this.rotAccel=0.05;
 	
-
-
-    this.declination=degToRad * declination;
+	this.declination=degToRad * declination;
+	this.angleSpeed=0;
 
 	this.heliceAngle = 0;
 	this.finAngle = 0;
@@ -124,6 +123,20 @@ MySubmarine.prototype.rotate = function(direction) {
  		this.finAngle = -45;
 	}
 }
+
+MySubmarine.prototype.dive = function(direction) {
+	// 0 -> down
+	if (direction == 0) {
+		this.declination -= Math.sin(this.angleSpeed * this.degToRad);
+		if (this.declination < -25)
+		this.declination = -25;
+	}
+	else {
+		this.declination += Math.sin(this.angleSpeed * this.degToRad);
+		if (this.declination > 25)
+		this.declination = 25;
+	}
+};
 
 
  MySubmarine.prototype.update = function(currTime){
