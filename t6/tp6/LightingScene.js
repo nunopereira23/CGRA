@@ -37,6 +37,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this, 3 ,2 ,5);
 	this.poste = new MyCylinder(this, 100, 1);
 	this.target = new MyTarget(this,-5,2,2);
+	this.torpedo = new MyTorpedo(this, this.submarine);
 
 	this.targets = [new MyTarget(this, -5, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
 
@@ -232,7 +233,6 @@ LightingScene.prototype.display = function() {
 	//Draw torpedo
 
 	if (this.drawTorpedo == true){
-		this.torpedo = new MyTorpedo(this, this.submarine);
 		this.pushMatrix();
 		this.translate(this.torpedo.x, this.torpedo.y, this.torpedo.z);
 		this.rotate(this.torpedo.rot,0,1,0);
@@ -257,7 +257,8 @@ LightingScene.prototype.display = function() {
 };
 
 LightingScene.prototype.positionTorpedo = function(){
-	
+	this.torpedo = new MyTorpedo(this, this.submarine);
+	this.drawTorpedo = true;
 }
 
 

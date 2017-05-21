@@ -128,7 +128,7 @@ MyInterface.prototype.processKeyboard = function(event) {
 			break;
 		case(70):
 		case(102):
-			this.scene.drawTorpedo = true;
+			this.scene.positionTorpedo();
 			break;
 	};
 };
