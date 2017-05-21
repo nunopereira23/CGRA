@@ -52,7 +52,7 @@ MyInterface.prototype.init = function(application) {
 	group2.add(this.scene, 'enable');
 
 	var group3=this.gui.addFolder("Submarine");
-	group3.add(this.scene, 'currSubmarineApperance', this.scene.submarineAppearanceList);
+	group3.add(this.scene, 'currSubmarineApperance', this.scene.submarineAppearanceList)
 
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
@@ -60,7 +60,6 @@ MyInterface.prototype.init = function(application) {
 	// min and max values can be specified as parameters
 	
 	this.gui.add(this.scene, 'speed', -5, 5);
-	
 
 	return true;
 };
@@ -138,10 +137,8 @@ MyInterface.prototype.processKeyUp = function(event) {
 	// or use String.fromCharCode(event.keyCode) to compare chars
 	
 	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
-    if (event.keyCode == 65 || event.keyCode == 97 || event.keyCode == 68 || event.keyCode == 100) 
-    	this.scene.submarine.finAngle= 0;
-   /* if (event.keyCode == 81 || event.keyCode == 113 || event.keyCode == 69 || event.keyCode == 101) 
-    	this.scene.submarine.horFinAngle= 0;*/
+    
+    this.scene.submarine.finAngle= 0;
     /*switch (event.keyCode)
     {
         //a ou A
@@ -149,19 +146,16 @@ MyInterface.prototype.processKeyUp = function(event) {
         case (97):
         this.scene.submarine.rotate(1);
         break;
-
         //d ou D
         case (68):
         case (100):
         this.scene.submarine.rotate(0);
         break;
-
         //s ou S
         case (83):
         case (115):
         this.scene.submarine.decreaseVeloc();
         break;
-
         //w ou W
         case (87):
         case (119):

@@ -37,9 +37,9 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this);
 	this.poste = new MyCylinder(this, 100, 1);
 	this.target = new MyTarget(this,-5,2,2);
+	this.torpedo = new MyTorpedo(this, this.submarine);
 
-
-
+	this.targets = [new MyTarget(this, -5, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
 
 	this.backgroundAppearance = new CGFappearance(this);
 	this.backgroundAppearance.loadTexture("../resources/images/ocean.png");
@@ -225,21 +225,16 @@ LightingScene.prototype.display = function() {
 
 	// Draw targets
 	this.pushMatrix();
-	this.translate(10,1,8);
-	this.target.display();
+	for (i = 0; i < this.targets.length; i++)
+		this.targets[i].display();
 	this.popMatrix();
 
+
+	//Draw torpedo
 	this.pushMatrix();
-	this.translate(5,3,15);
-	this.target.display();
+	this.scale(1.5,1,1);
+	this.torpedo.display();
 	this.popMatrix();
-
-	this.pushMatrix();
-	this.translate(2,5,3);
-	this.target.display();
-	this.popMatrix();
-
-
 
 	// ---- END Background, camera and axis setup
 
