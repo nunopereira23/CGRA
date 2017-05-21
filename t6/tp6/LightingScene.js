@@ -241,8 +241,8 @@ LightingScene.prototype.display = function() {
 LightingScene.prototype.update = function(currTime){
 	if(this.enable){
 		this.clock.update(currTime);
-		this.submarine.update(currTime);
 	}
+	this.submarine.update(currTime);
 	if(this.currSubmarineApperance == "Yellow")
 		this.submarine.currentAppearance = 0;
 
