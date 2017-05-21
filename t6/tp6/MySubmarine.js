@@ -22,6 +22,7 @@ function MySubmarine(scene, x=0, y=0, z=0) {
 
 	this.heliceAngle = 0;
 	this.finAngle = 0;
+	this.horFinAngle = 0;
 
 	//this.up=0;
 	//this.down=0;
@@ -174,13 +175,13 @@ MySubmarine.prototype.dive = function(direction) {
 	if(direction==0){ 
 		this.upDown-=this.rotSpeed; 
 		 this.upDown %= degToRad*360; 
-		 //this.finAngle = 45; 
+		 this.horFinAngle = 45; 
 	  } 
 	  else{ 
 		this.upDown+=this.rotSpeed; 
 		 if(this.upDown<0) 
 		 this.upDown=360 * degToRad * this.upDown-this.rotSpeed; 
-		 //this.finAngle = -45; 
+		 this.horFinAngle = -45; 
 	  } 
 	/*if (direction == 0) {
 		this.down=1;
@@ -233,6 +234,9 @@ MySubmarine.prototype.dive = function(direction) {
  	if(this.periscopeUp==1){
  		this.incPeriscope();
  	}
+
+ 	if (this.upDown==degToRad*90)
+ 		this.horFinAngle = 0;
 
  }
 
@@ -289,7 +293,9 @@ MySubmarine.prototype.dive = function(direction) {
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
-		this.scene.translate(0,0.05,-0.3);
+		this.scene.translate(0,0,-0.1);
+		this.scene.rotate(this.horFinAngle*degToRad,1,0,0);
+		this.scene.translate(0,0.05,-0.2);
 		this.scene.rotate(Math.PI/2,1,0,0);
 		this.scene.rotate(Math.PI/2,0,0,1);
 		this.scene.scale(1.5,1,1);

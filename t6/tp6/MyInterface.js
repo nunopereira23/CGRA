@@ -136,8 +136,10 @@ MyInterface.prototype.processKeyUp = function(event) {
 	// or use String.fromCharCode(event.keyCode) to compare chars
 	
 	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
-    
-    this.scene.submarine.finAngle= 0;
+    if (event.keyCode == 65 || event.keyCode == 97 || event.keyCode == 68 || event.keyCode == 100) 
+    	this.scene.submarine.finAngle= 0;
+   /* if (event.keyCode == 81 || event.keyCode == 113 || event.keyCode == 69 || event.keyCode == 101) 
+    	this.scene.submarine.horFinAngle= 0;*/
     /*switch (event.keyCode)
     {
         //a ou A
