@@ -7,8 +7,9 @@ function MyTarget(scene, x, y, z) {
     this.pos_y = y;
     this.pos_z = z;
 
-	this.body = new MyPrism(scene,8,1);
-
+	this.body = new MyPrismV2(scene,8,1);
+	this.targetAppearance = new CGFappearance(scene);
+	this.targetAppearance.loadTexture("../resources/images/rockTexture3.png");
 }
 
 
@@ -18,6 +19,7 @@ MyTarget.prototype.constructor = MyTarget;
 MyTarget.prototype.display = function () {
 
 this.scene.pushMatrix();
+this.targetAppearance.apply();
 this.body.display();
 this.scene.popMatrix();
 }

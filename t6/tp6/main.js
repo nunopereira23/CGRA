@@ -10,6 +10,7 @@ serialInclude([
 	'MyTable.js',
 	'Plane.js', 
 	'MyPrism.js' ,
+	'MyPrismV2.js',
 	'MyCylinder.js' ,
 	'MyFloor.js',
 	'MyClock.js',
