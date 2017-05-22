@@ -25,8 +25,8 @@ function MyTorpedo(scene, submarine) {
 
 	this.target = this.scene.targets[0];
 
-	this.b4_x = this.target.pos_x; 
-	this.b4_y = this.target.pos_y; 
+	this.b4_x = this.target.pos_x - 1; 
+	this.b4_y = this.target.pos_y + 1; 
 	this.b4_z = this.target.pos_z;
 
 

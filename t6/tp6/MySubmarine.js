@@ -140,12 +140,12 @@ MySubmarine.prototype.rotate = function(direction) {
 MySubmarine.prototype.dive = function(direction) {
 	// 0 -> down
 	if(direction==0){ 
-		this.upDown-=this.rotSpeed; 
+		this.upDown-=this.rotSpeed/3; 
 		 this.upDown %= degToRad*360; 
 		 //this.horFinAngle = 45; 
 	  } 
 	  else{ 
-		this.upDown+=this.rotSpeed; 
+		this.upDown+=this.rotSpeed/3; 
 		 if(this.upDown<0) 
 		 this.upDown=360 * degToRad * this.upDown-this.rotSpeed; 
 		 //this.horFinAngle = -45; 
