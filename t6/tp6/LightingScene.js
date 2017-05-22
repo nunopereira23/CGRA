@@ -37,9 +37,11 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this, 3 ,2 ,5);
 	this.poste = new MyCylinder(this, 100, 1);
 	
-	
+	var rand = Math.floor((Math.random() * 20) + 1);
 
-	this.targets = [new MyTarget(this, 10, 2, 2), new MyTarget(this, 8, 7, 15), new MyTarget(this, 4, 3, 12)];
+	this.targets = [new MyTarget(this, Math.floor((Math.random() * 15) + 1), Math.floor((Math.random() * 15) + 1), Math.floor((Math.random() * 15) + 1)), 
+	new MyTarget(this,Math.floor((Math.random() * 15) + 1), Math.floor((Math.random() * 15) + 1) , Math.floor((Math.random() * 15) + 1) ),
+	new MyTarget(this, Math.floor((Math.random() * 15) + 1) , Math.floor((Math.random() * 15) + 1) , Math.floor((Math.random() * 15) + 1) )];
 	this.torpedo = new MyTorpedo(this, this.submarine);
 
 
@@ -177,7 +179,14 @@ LightingScene.prototype.display = function() {
 	this.backgroundAppearance.apply();
 	this.background.display();
 	this.popMatrix();
-
+/*
+	this.pushMatrix();
+	this.translate(22.5,22.5,0);
+	this.scale(15,15,15);
+	this.backgroundAppearance.apply();
+	this.background.display();
+	this.popMatrix();
+*/
 	//Draw Plane
 	this.pushMatrix();
 	this.rotate(-90*degToRad,1,0,0);
